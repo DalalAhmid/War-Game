@@ -7,6 +7,7 @@ public class Deck {
     private ArrayList<Card> cards = new ArrayList <Card>();
     private int arraySize;
     private int cardsLeft;
+    private ArrayList<Card> discards = new ArrayList<Card>();
 
     public void newDeck() {
         for (int i = 0; i < 4; i++) {
@@ -29,9 +30,33 @@ public class Deck {
     }
 
     public String removeCard() {
-        Random r = new Random();
-        int index = r.nextInt(cardsLeft);
-        cards.remove(index);
-        return cards.get(index).toString();
+        if (cardsLeft > 0) {
+            Random r = new Random();
+            int index = r.nextInt(cardsLeft);
+            discards.add(cards.get(index));
+            cards.remove(index);
+            cardsLeft++;
+            return cards.get(index).toString();
+        }
+        else {
+            return "No more cards remaining";
+        }
     }
+
+    public String addCard() {
+        Random r = new Random();
+        if (cardsLeft < 52) {
+            int index = r.nextInt(discards.size());
+            cards.add(discards.get(index));
+            cardsLeft--;
+            return "Done";
+        }
+        else {
+            return "False";
+        }
+    }
+
+
+
+
 }
