@@ -1,12 +1,13 @@
+import java.util.Comparator;
 import java.util.Random;
 
 public class Card {
 
     // ranks are ordered Ace-low and Queen-high
-    private final String ranks[] ={"Ace","2","3","4","5","6","7","8","9","10","Jack","King","Queen"};
+    private final String ranks[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "King", "Queen"};
 
     // suits are ordered alphabetically
-    private final String suits[] = {"Clubs","Diamonds","Hearts","Spades"};
+    private final String suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
 
     private String rank;
     private String suit;
@@ -19,7 +20,7 @@ public class Card {
         this.rank = ranks[index];
     }
 
-    public Card (int rankIndex, int suitIndex) {
+    public Card(int rankIndex, int suitIndex) {
         this.rank = ranks[rankIndex];
         this.suit = suits[suitIndex];
     }
@@ -47,4 +48,24 @@ public class Card {
     public String toString() {
         return rank + " of " + suit;
     }
+
+    public int Comparator(Card userCard, Card compCard) {
+        CardSortingComparator c = new CardSortingComparator();
+        return c.compare(userCard, compCard);
     }
+
+}
+
+class CardSortingComparator implements Comparator<Card> {
+    @Override
+    public int compare(Card a, Card b) {
+        int RankCompare = Integer.compare(a.getRankIndex(), b.getRankIndex());
+        int SuitCompare = Integer.compare(a.getSuitIndex(), b.getSuitIndex());
+
+        if (RankCompare == 0) {
+            return SuitCompare;
+        } else {
+            return RankCompare;
+        }
+    }
+}

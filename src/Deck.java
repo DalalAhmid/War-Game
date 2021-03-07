@@ -4,23 +4,20 @@ import java.util.Collections;
 
 public class Deck {
 
-    private ArrayList<Card> cards = new ArrayList <Card>();
+    private ArrayList<Card> cards = new ArrayList<Card>();
     private int arraySize;
     private int cardsLeft;
     private ArrayList<Card> discards = new ArrayList<Card>();
 
     public void newDeck() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 13; j++) {
-               cards.add(new Card(i, j));
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 4; j++) {
+                cards.add(new Card(i, j));
             }
         }
-        cardsLeft = 0;
+        cardsLeft = 52;
+        discards.clear();
     }
-
-   // public int getCardsLeft() {
-   //     return cardsLeft;
-   // }
 
     public void shuffle() {
         Random r = new Random();
@@ -29,17 +26,16 @@ public class Deck {
         }
     }
 
-    public String removeCard() {
+    public Card removeCard() {
         if (cardsLeft > 0) {
             Random r = new Random();
             int index = r.nextInt(cardsLeft);
             discards.add(cards.get(index));
             cards.remove(index);
-            cardsLeft++;
-            return cards.get(index).toString();
-        }
-        else {
-            return "No more cards remaining";
+            cardsLeft--;
+            return discards.get(discards.size() - 1);
+        } else {
+            return null;
         }
     }
 
@@ -48,15 +44,16 @@ public class Deck {
         if (cardsLeft < 52) {
             int index = r.nextInt(discards.size());
             cards.add(discards.get(index));
-            cardsLeft--;
+            cardsLeft++;
             return "Done";
-        }
-        else {
+        } else {
             return "False";
         }
     }
 
-
+    public int getCardsLeft() {
+        return cardsLeft;
+    }
 
 
 }
