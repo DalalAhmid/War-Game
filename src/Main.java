@@ -54,7 +54,7 @@ public class Main {
                     System.out.println("It's a tie:");
                     nTie++;
                 }
-                System.out.println("your card is " + userCard.toString());
+                System.out.println("Your card was " + userCard.toString());
 
                 // ask user to play again
                 invalid = true;
