@@ -21,10 +21,9 @@ public class Main {
             // assign values to computer and user
             compCard = theDeck.removeCard();
             userCard = theDeck.removeCard();
-            // get user's bet
-            if (compCard != null) {
+            // get user's bet, only if there are cards left in the deck
+            if (theDeck.getCardsLeft() > 0) {
                 System.out.println("Computer's card is " + compCard.toString());
-
                 invalid = true;
                 while (invalid) {
                     System.out.println("Keep in mind that there are " + theDeck.getCardsLeft() + " cards left in the deck");
@@ -44,7 +43,6 @@ public class Main {
                         invalid = true;
                     }
                 }
-
                 // determine outcome
                 if (((c.compare(userCard, compCard) > 0) && guessedHigher) || ((c.compare(compCard, userCard) > 0) && !guessedHigher)) {
                     System.out.println("Great! You're right:");
@@ -77,6 +75,7 @@ public class Main {
                         invalid = true;
                     }
                 }
+                //end game when deck is empty
             } else {
                 System.out.println("There are no cards left in the deck");
                 play = false;

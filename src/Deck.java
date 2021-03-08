@@ -4,11 +4,13 @@ import java.util.Collections;
 
 public class Deck {
 
+    //declare deck fields
     private ArrayList<Card> cards = new ArrayList<Card>();
     private int arraySize;
     private int cardsLeft;
     private ArrayList<Card> discards = new ArrayList<Card>();
 
+    //method to create new standard deck
     public void newDeck() {
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
@@ -19,6 +21,7 @@ public class Deck {
         discards.clear();
     }
 
+    //method to shuffle deck
     public void shuffle() {
         Random r = new Random();
         for (int i = 0; i < Math.pow(cardsLeft, 2); i++) {
@@ -26,6 +29,7 @@ public class Deck {
         }
     }
 
+    //method to remove a card from the deck
     public Card removeCard() {
         if (cardsLeft > 0) {
             Random r = new Random();
@@ -39,6 +43,7 @@ public class Deck {
         }
     }
 
+    //method to add a card to the deck
     public String addCard() {
         Random r = new Random();
         if (cardsLeft < 52) {
@@ -51,6 +56,7 @@ public class Deck {
         }
     }
 
+    //method that returns how many cards are left in deck
     public int getCardsLeft() {
         return cardsLeft;
     }
